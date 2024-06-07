@@ -1,0 +1,11 @@
+{
+  "esy": {
+    "build": [
+      "#{os == 'windows' ? 'x86_64-w64-mingw32-':''}gcc test.c -I#{esy-expat.install / 'include'} -L#{esy-expat.lib} -lexpat -o test",
+      "./test"
+    ]
+  },
+  "dependencies": {
+    "esy-expat": "*"
+  }
+}

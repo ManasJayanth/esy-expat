@@ -1,0 +1,23 @@
+{
+  "name": "esy-expat",
+  "version": "2.6.2000",
+  "description": "libexpat packaged for esy",
+  "source": "https://github.com/libexpat/libexpat/releases/download/R_2_6_2/expat-2.6.2.tar.gz#sha256:d4cf38d26e21a56654ffe4acd9cd5481164619626802328506a2869afab29ab3",
+  "override": {
+    "build": [
+      "find ./ -exec touch -t 200905010101 {} +",
+      ["chmod", "755", "./configure"],
+      "./configure #{os == 'darwin' ? '--disable-dependency-tracking': ''} --prefix=#{self.install} #{os == 'windows'? '--host x86_64-w64-mingw32': ''} --mandir=#{self.install / 'man'}",
+      "make -j#{self.jobs}"
+    ],
+    "install": "make install",
+    "buildsInSource": true,
+    "exportedEnv": {
+      "PKG_CONFIG_PATH": {
+        "val": "#{self.lib / 'pkgconfig'}",
+        "scope": "global"
+      }
+    },
+    "dependencies": {}
+  }
+}
